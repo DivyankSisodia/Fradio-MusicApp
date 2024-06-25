@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "771913849510",
+    "project_id": "fradio-c358e",
+    "storage_bucket": "fradio-c358e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771913849510:android:328628f0477720723ff267",
+        "android_client_info": {
+          "package_name": "com.e"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771913849510:android:df746906db9fd23e3ff267",
+        "android_client_info": {
+          "package_name": "com.ex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771913849510:android:0e58e6848c7104033ff267",
+        "android_client_info": {
+          "package_name": "com.example.fradio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
