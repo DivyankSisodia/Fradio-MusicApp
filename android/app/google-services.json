@@ -7,50 +7,25 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:771913849510:android:328628f0477720723ff267",
-        "android_client_info": {
-          "package_name": "com.e"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:771913849510:android:df746906db9fd23e3ff267",
-        "android_client_info": {
-          "package_name": "com.ex"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:771913849510:android:0e58e6848c7104033ff267",
         "android_client_info": {
           "package_name": "com.example.fradio"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "771913849510-i2mcv12jji3bush69lrehuckjsqitfih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fradio",
+            "certificate_hash": "45ec05940703d8609b951a2604f9fb8db4606d73"
+          }
+        },
+        {
+          "client_id": "771913849510-n91rpb377829vovd60ipg003g1jv0je4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA4cX9pAEg8kckbxGjSyO4iy7_YZ4hOeDA"
@@ -58,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771913849510-n91rpb377829vovd60ipg003g1jv0je4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "771913849510-i2ulinhocqk7hs5umaiaab1e9lvakh60.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fradio"
+              }
+            }
+          ]
         }
       }
     }

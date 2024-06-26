@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fradio/src/core/constant/colors/app_colors.dart';
 import 'package:fradio/src/core/constant/size/app_size.dart';
+import 'package:fradio/src/features/auth/screen/login_with_email_screen.dart';
+import 'package:fradio/src/features/auth/widget/registration_buttons.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+import '../repository/google_signin_repository.dart';
+import '../widget/logo_heading.dart';
+import '../widget/social_login_button.dart';
+import 'phone_authentication.dart';
+
+class LoginScreen extends StatelessWidget {
+  static const String routeName = '/login';
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,349 +27,58 @@ class SignupScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Fradio',
-                          style: TextStyle(
-                            color: AppColor.primaryColor,
-                            fontSize: 38,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Gap(10),
-                        Container(
-                          height: 15,
-                          width: 15,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.tertiaryColor.withOpacity(0.5),
-                          ),
-                        ),
-                        const Gap(5),
-                        Container(
-                          height: 25,
-                          width: 25,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.tertiaryColor,
-                          ),
-                        ),
-                        const Gap(5),
-                        Container(
-                          height: 35,
-                          width: 35,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.extraColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(20),
-                    Text(
-                      'Keep Jamming mates!!',
-                      style: TextStyle(
-                        color: AppColor.primaryColor,
-                        fontSize: appSize.mdfontsize,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: LogoHeader(appSize: appSize),
             ),
             Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: appSize.lgmargin,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        side: BorderSide(
-                          color: AppColor.secondaryColor,
-                          width: 2,
-                        ),
-                        overlayColor: Colors.grey.withOpacity(0.5),
-                        backgroundColor: AppColor.backGroundColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(21),
-                        ),
-                      ),
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: appSize.lgmargin),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Iconsax.maximize_circle,
-                              color: AppColor.backGroundColor,
-                              size: 20,
-                            ),
-                            const Text(
-                              'Sign Up with Email',
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  RegistrationButton(
+                    appSize: appSize,
+                    text: 'Sign Up with Email',
+                    textColor: AppColor.backGroundColor,
+                    backgroundColor: AppColor.secondaryColor,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(EmailLoginScreen.routeName);
+                    },
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(
-                  //     horizontal: appSize.lgmargin,
-                  //   ),
-                  //   height: appSize.mdcontainer,
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     color: AppColor.secondaryColor,
-                  //     borderRadius: BorderRadius.circular(appSize.lgradius),
-                  //   ),
-                  //   child: Center(
-                  //     child: Text(
-                  //       'Sign Up',
-                  //       style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontSize: appSize.mdheight,
-                  //         fontWeight: FontWeight.bold,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Gap(appSize.mdgap),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: appSize.lgmargin,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        side: BorderSide(
-                          color: AppColor.secondaryColor,
-                          width: 2,
-                        ),
-                        overlayColor: Colors.grey.withOpacity(0.5),
-                        backgroundColor: AppColor.backGroundColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(21),
-                        ),
-                      ),
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: appSize.lgmargin),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Iconsax.maximize_circle,
-                              color: AppColor.backGroundColor,
-                              size: 20,
-                            ),
-                            const Text(
-                              'Sign Up with Email',
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  SocialLoginButtons(
+                    appSize: appSize,
+                    text: 'Continue with Phone Number',
+                    icon: Iconsax.mobile,
+                    iconsize: 20,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(PhoneAuthScreen.routeName);
+                    },
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(
-                  //     horizontal: appSize.lgmargin,
-                  //   ),
-                  //   height: appSize.mdcontainer,
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //       color: AppColor.secondaryColor,
-                  //       width: 2,
-                  //     ),
-                  //     color: AppColor.backGroundColor,
-                  //     borderRadius: BorderRadius.circular(appSize.lgradius),
-                  //   ),
-                  //   child: Row(
-                  //     children: [
-                  //       Padding(
-                  //         padding: EdgeInsets.only(
-                  //           left: appSize.xlpadding,
-                  //         ),
-                  //         child: Icon(
-                  //           const FaIcon(FontAwesomeIcons.google).icon,
-                  //           color: AppColor.secondaryColor,
-                  //           size: appSize.mdiconsize,
-                  //         ),
-                  //       ),
-                  //       const Gap(10),
-                  //       Padding(
-                  //         padding: EdgeInsets.symmetric(
-                  //           horizontal: appSize.mdpadding,
-                  //         ),
-                  //         child: Text(
-                  //           'Continue with Google',
-                  //           style: TextStyle(
-                  //             color: AppColor.secondaryColor,
-                  //             fontSize: appSize.mdheight,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   Gap(appSize.mdgap),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: appSize.lgmargin,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        side: BorderSide(
-                          color: AppColor.secondaryColor,
-                          width: 2,
-                        ),
-                        overlayColor: Colors.grey.withOpacity(0.5),
-                        backgroundColor: AppColor.backGroundColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(21),
-                        ),
-                      ),
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: appSize.lgmargin),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Iconsax.maximize_circle,
-                              color: AppColor.backGroundColor,
-                              size: 20,
-                            ),
-                            const Text(
-                              'Sign Up with Email',
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  SocialLoginButtons(
+                    appSize: appSize,
+                    text: 'Continue with Google',
+                    icon: FontAwesomeIcons.google,
+                    iconsize: 20,
+                    onPressed: () {
+                      GoogleSignMethod().signInWithGoogle(context);
+                    },
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(
-                  //     horizontal: appSize.lgmargin,
-                  //   ),
-                  //   height: appSize.mdcontainer,
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //       color: AppColor.secondaryColor,
-                  //       width: 2,
-                  //     ),
-                  //     color: AppColor.backGroundColor,
-                  //     borderRadius: BorderRadius.circular(appSize.lgradius),
-                  //   ),
-                  //   child: Row(
-                  //     children: [
-                  //       Padding(
-                  //         padding: EdgeInsets.only(
-                  //           left: appSize.xlpadding,
-                  //         ),
-                  //         child: Icon(
-                  //           Iconsax.mobile,
-                  //           color: AppColor.secondaryColor,
-                  //           size: appSize.mdiconsize,
-                  //         ),
-                  //       ),
-                  //       const Gap(10),
-                  //       Padding(
-                  //         padding: EdgeInsets.symmetric(
-                  //           horizontal: appSize.mdpadding,
-                  //         ),
-                  //         child: Text(
-                  //           'Continue with Phone Number',
-                  //           style: TextStyle(
-                  //             color: AppColor.secondaryColor,
-                  //             fontSize: appSize.mdheight,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   Gap(appSize.mdgap),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: appSize.lgmargin,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        side: BorderSide(
-                          color: AppColor.secondaryColor,
-                          width: 2,
-                        ),
-                        overlayColor: Colors.grey.withOpacity(0.5),
-                        backgroundColor: AppColor.backGroundColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(21),
-                        ),
-                      ),
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: appSize.lgmargin),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Iconsax.maximize_circle,
-                              color: AppColor.backGroundColor,
-                              size: 20,
-                            ),
-                            const Text(
-                              'Sign Up with Email',
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  SocialLoginButtons(
+                    appSize: appSize,
+                    text: 'Continue with Apple',
+                    icon: FontAwesomeIcons.apple,
+                    iconsize: 24,
+                    onPressed: () {},
                   ),
                   Gap(appSize.lggap),
                   Text(
-                    'Login',
+                    'Log in',
                     style: TextStyle(
                       color: AppColor.primaryColor,
-                      fontSize: appSize.mdfontsize,
+                      fontSize: appSize.lgfontsize,
                       fontWeight: FontWeight.bold,
                     ),
                   )
