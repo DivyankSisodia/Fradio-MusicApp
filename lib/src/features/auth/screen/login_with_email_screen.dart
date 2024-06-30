@@ -9,7 +9,6 @@ import '../../../core/constant/size/app_size.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../home/screen/home_screen.dart';
 import '../provider/login_with_email_provider.dart';
-import '../repository/login_repository.dart';
 import '../widget/logo_heading.dart';
 
 class EmailLoginScreen extends ConsumerWidget {
@@ -24,8 +23,6 @@ class EmailLoginScreen extends ConsumerWidget {
     final TextEditingController passwordController = TextEditingController();
 
     final appSize = MyAppSize.instance;
-
-    final LoginWithEmail loginWithEmail = LoginWithEmail();
 
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,

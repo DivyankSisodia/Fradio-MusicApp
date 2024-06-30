@@ -43,7 +43,7 @@ class SocialLoginButtons extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 20.0, right: 15.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 15.0),
                 child: Icon(
                   icon,
                   color: AppColor.secondaryColor,
@@ -51,10 +51,10 @@ class SocialLoginButtons extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: Text(
                   text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColor.primaryColor,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

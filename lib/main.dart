@@ -6,12 +6,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'firebase_options.dart';
 import 'src/config/routes/app_routes.dart';
 import 'src/features/home/screen/home_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await dotenv.load(fileName: ".env");
   await Hive.initFlutter();
   await Hive.openBox('authBox');
   runApp(const ProviderScope(child: MyApp()));
