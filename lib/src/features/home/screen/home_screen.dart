@@ -1,14 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fradio/src/core/constant/colors/app_colors.dart';
 import 'package:fradio/src/core/constant/texts/data.dart';
 import 'package:fradio/src/features/home/widgets/chip.dart';
+import 'package:gap/gap.dart';
 
 import '../controllers/chip_controller.dart';
 import '../controllers/popular_artist_controller.dart';
 import '../model/popular_albums_model.dart';
 import '../model/popular_artists_model.dart';
+import '../model/popular_radio_model.dart';
+import '../widgets/popluar_radio.dart';
+import '../widgets/popular_album.dart';
+import '../widgets/popular_artists.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
@@ -130,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                     const Text(
                       'Popular Artists',
                       style: TextStyle(
-                        color: AppColor.primaryColor,
+                        color: AppColor.secondaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,6 +151,7 @@ class HomeScreen extends StatelessWidget {
                           data: (data) {
                             List<PopularArtistsModel> popularArtists = [];
                             List<PopularAlbumModel> popularAlbums = [];
+                            List<PopularRadioModel> popularRadios = [];
 
                             final List<dynamic> sections =
                                 data['sections']['items'];
@@ -167,6 +175,15 @@ class HomeScreen extends StatelessWidget {
                                     .map((item) =>
                                         PopularAlbumModel.fromJson(item))
                                     .toList();
+                              } else if (section['type'] == 'section' &&
+                                  section['title'] == 'Popular radio') {
+                                final List<dynamic> items =
+                                    section['contents']['items'];
+                                popularRadios = items
+                                    .where((item) => item['type'] == 'playlist')
+                                    .map((item) =>
+                                        PopularRadioModel.fromJson(item))
+                                    .toList();
                               }
                             }
 
@@ -174,101 +191,36 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (popularArtists.isNotEmpty)
-                                  SizedBox(
-                                    height: 120,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: popularArtists.length,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundImage: NetworkImage(
-                                                  popularArtists[index]
-                                                      .visuals
-                                                      .avatar
-                                                      .url,
-                                                ),
-                                                radius: 40,
-                                              ),
-                                              const SizedBox(height: 8),
-                                              SizedBox(
-                                                height: 20,
-                                                width: 75,
-                                                child: Center(
-                                                  child: Text(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    popularArtists[index].name,
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: AppColor
-                                                          .secondaryColor,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                  PopularArtistsWidget(
+                                    popularArtists: popularArtists,
                                   ),
-                                const SizedBox(height: 10),
+                                const Gap(10),
                                 const Text(
                                   'Popular Albums',
                                   style: TextStyle(
-                                    color: AppColor.primaryColor,
+                                    color: AppColor.secondaryColor,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const Gap(10),
                                 if (popularAlbums.isNotEmpty)
-                                  SizedBox(
-                                    height: 120,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: popularAlbums.length,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundImage: NetworkImage(
-                                                  popularAlbums[index]
-                                                      .cover
-                                                      .first
-                                                      .url,
-                                                ),
-                                                radius: 40,
-                                              ),
-                                              const SizedBox(height: 8),
-                                              SizedBox(
-                                                height: 20,
-                                                width: 75,
-                                                child: Center(
-                                                  child: Text(
-                                                    popularAlbums[index].name,
-                                                    style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: AppColor
-                                                            .secondaryColor),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                  PopularAlbumWidget(
+                                    popularAlbums: popularAlbums,
+                                  ),
+                                const Gap(20),
+                                const Text(
+                                  'Popular Radio Playlists',
+                                  style: TextStyle(
+                                    color: AppColor.secondaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Gap(10),
+                                if (popularRadios.isNotEmpty)
+                                  PopularRadioWidget(
+                                    popularRadios: popularRadios,
                                   ),
                               ],
                             );

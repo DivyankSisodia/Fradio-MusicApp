@@ -8,7 +8,7 @@ import 'package:gap/gap.dart';
 import '../../../core/constant/size/app_size.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../home/screen/home_screen.dart';
-import '../provider/login_with_email_provider.dart';
+import '../controllers/login_with_email_provider.dart';
 import '../widget/logo_heading.dart';
 
 class EmailLoginScreen extends ConsumerWidget {
