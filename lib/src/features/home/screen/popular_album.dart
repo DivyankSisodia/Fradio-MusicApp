@@ -16,7 +16,7 @@ class PopularAlbumWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: popularAlbums.length,
@@ -26,45 +26,32 @@ class PopularAlbumWidget extends StatelessWidget {
               horizontal: 10.0,
             ),
             child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center,
-              crossAxisAlignment:
-                  CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black
-                            .withOpacity(0.2),
+                        color: Colors.black.withOpacity(0.2),
                         spreadRadius: 1,
                         blurRadius: 5,
-                        offset:
-                            const Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
                   height: 160.h,
                   width: 120.w,
                   child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                      imageUrl: popularAlbums[
-                              index]
-                          .cover[1]
-                          .url, // Adjust index according to your data structure
-                      placeholder:
-                          (context, url) =>
-                              const Center(
-                        child:
-                            CircularProgressIndicator(),
+                      imageUrl: popularAlbums[index]
+                          .cover,// Adjust index according to your data structure
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(),
                       ),
-                      errorWidget:
-                          (context, url, error) =>
-                              const Icon(
+                      errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                       ),
                       fit: BoxFit.cover,
@@ -80,8 +67,7 @@ class PopularAlbumWidget extends StatelessWidget {
                       popularAlbums[index].name,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: AppColor
-                            .secondaryColor,
+                        color: AppColor.secondaryColor,
                       ),
                     ),
                   ),
@@ -94,4 +80,3 @@ class PopularAlbumWidget extends StatelessWidget {
     );
   }
 }
-

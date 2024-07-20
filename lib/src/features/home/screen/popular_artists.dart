@@ -29,8 +29,6 @@ class PopularArtistsWidget extends StatelessWidget {
                   backgroundImage: NetworkImage(
                     popularArtists[index]
                         .visuals
-                        .avatar
-                        .url,
                   ),
                   radius: 40,
                 ),

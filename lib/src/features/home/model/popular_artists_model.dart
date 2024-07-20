@@ -1,7 +1,15 @@
+import 'package:hive/hive.dart';
+
+part 'popular_artists_model.g.dart';
+
+@HiveType(typeId: 1)
 class PopularArtistsModel {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String name;
-  final Visuals visuals;
+  @HiveField(2)
+  final String visuals;
 
   PopularArtistsModel({
     required this.id,
@@ -13,48 +21,7 @@ class PopularArtistsModel {
     return PopularArtistsModel(
       id: json['id'],
       name: json['name'],
-      visuals: Visuals.fromJson(json['visuals']),
+      visuals: json['visuals']['avatar'][1]['url'],
     );
-  }
-}
-
-class Visuals {
-  final Avatar avatar;
-
-  Visuals({required this.avatar});
-
-  factory Visuals.fromJson(Map<String, dynamic> json) {
-    var avatarList = json['avatar'] as List;
-    Avatar firstAvatar = Avatar.fromJson(avatarList[0]);
-
-    return Visuals(
-      avatar: firstAvatar,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'avatar': avatar.toJson(),
-    };
-  }
-}
-
-class Avatar {
-  final String url;
-
-  Avatar({
-    required this.url,
-  });
-
-  factory Avatar.fromJson(Map<String, dynamic> json) {
-    return Avatar(
-      url: json['url'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'url': url,
-    };
   }
 }

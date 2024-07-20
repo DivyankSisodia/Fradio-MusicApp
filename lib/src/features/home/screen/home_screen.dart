@@ -13,9 +13,9 @@ import '../controllers/popular_artist_controller.dart';
 import '../model/popular_albums_model.dart';
 import '../model/popular_artists_model.dart';
 import '../model/popular_radio_model.dart';
-import '../widgets/popluar_radio.dart';
-import '../widgets/popular_album.dart';
-import '../widgets/popular_artists.dart';
+import 'popluar_radio.dart';
+import 'popular_album.dart';
+import 'popular_artists.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
@@ -134,66 +134,28 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Popular Artists',
-                      style: TextStyle(
-                        color: AppColor.secondaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     const SizedBox(height: 10),
                     Consumer(
                       builder: (context, ref, child) {
-                        final homeData = ref.watch(fetchHomeDataProvider);
+                        final homeDataAsyncValue = ref.watch(homeDataProvider);
 
-                        return homeData.when(
-                          data: (data) {
-                            List<PopularArtistsModel> popularArtists = [];
-                            List<PopularAlbumModel> popularAlbums = [];
-                            List<PopularRadioModel> popularRadios = [];
-
-                            final List<dynamic> sections =
-                                data['sections']['items'];
-
-                            for (var section in sections) {
-                              if (section['type'] == 'section' &&
-                                  section['title'] == 'Popular artists') {
-                                final List<dynamic> items =
-                                    section['contents']['items'];
-                                popularArtists = items
-                                    .where((item) => item['type'] == 'artist')
-                                    .map((item) =>
-                                        PopularArtistsModel.fromJson(item))
-                                    .toList();
-                              } else if (section['type'] == 'section' &&
-                                  section['title'] == 'Popular albums') {
-                                final List<dynamic> items =
-                                    section['contents']['items'];
-                                popularAlbums = items
-                                    .where((item) => item['type'] == 'album')
-                                    .map((item) =>
-                                        PopularAlbumModel.fromJson(item))
-                                    .toList();
-                              } else if (section['type'] == 'section' &&
-                                  section['title'] == 'Popular radio') {
-                                final List<dynamic> items =
-                                    section['contents']['items'];
-                                popularRadios = items
-                                    .where((item) => item['type'] == 'playlist')
-                                    .map((item) =>
-                                        PopularRadioModel.fromJson(item))
-                                    .toList();
-                              }
-                            }
-
+                        return homeDataAsyncValue.when(
+                          data: (homeData) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (popularArtists.isNotEmpty)
-                                  PopularArtistsWidget(
-                                    popularArtists: popularArtists,
+                                const Text(
+                                  'Popular Artists',
+                                  style: TextStyle(
+                                    color: AppColor.secondaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
+                                ),
+                                const Gap(10),
+                                if (homeData.popularArtists.isNotEmpty)
+                                  PopularArtistsWidget(
+                                      popularArtists: homeData.popularArtists),
                                 const Gap(10),
                                 const Text(
                                   'Popular Albums',
@@ -204,10 +166,9 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Gap(10),
-                                if (popularAlbums.isNotEmpty)
+                                if (homeData.popularAlbums.isNotEmpty)
                                   PopularAlbumWidget(
-                                    popularAlbums: popularAlbums,
-                                  ),
+                                      popularAlbums: homeData.popularAlbums),
                                 const Gap(20),
                                 const Text(
                                   'Popular Radio Playlists',
@@ -218,10 +179,9 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Gap(10),
-                                if (popularRadios.isNotEmpty)
+                                if (homeData.popularRadios.isNotEmpty)
                                   PopularRadioWidget(
-                                    popularRadios: popularRadios,
-                                  ),
+                                      popularRadios: homeData.popularRadios),
                               ],
                             );
                           },

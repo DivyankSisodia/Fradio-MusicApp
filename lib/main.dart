@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fradio/hive.dart';
 import 'package:fradio/src/features/auth/screen/signup_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'firebase_options.dart';
@@ -15,9 +16,17 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // Load .env file
   await dotenv.load(fileName: ".env");
+
+  // Initialize Hive
   await Hive.initFlutter();
+  // Register Hive Adaptors
+  hiveAdaptors();
+
+  // Open Hive Box for authentications
   await Hive.openBox('authBox');
+
   runApp(
     ProviderScope(
       child: ScreenUtilInit(

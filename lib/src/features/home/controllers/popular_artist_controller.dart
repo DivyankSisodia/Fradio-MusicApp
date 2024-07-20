@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../repository/home_data.dart';
 import '../repository/home_repository.dart';
 
-final artistProvider = Provider<HomeRepository>((ref) {
+final homeRepositoryProvider = Provider<HomeRepository>((ref) {
   return HomeRepository();
 });
 
-final fetchHomeDataProvider = FutureProvider<Map<String,dynamic>>((ref) async {
-  final data = ref.watch(artistProvider);
-  return data.fetchHomeData();
+final homeDataProvider = FutureProvider<HomeData>((ref) async {
+  final homeRepo = ref.watch(homeRepositoryProvider);
+  return homeRepo.fetchHomeData();
 });
