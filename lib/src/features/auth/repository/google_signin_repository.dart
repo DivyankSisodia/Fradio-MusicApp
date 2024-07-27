@@ -54,8 +54,7 @@ class GoogleSignMethod {
           "uid": userDetails.uid,
         };
 
-        bool result =
-            await DataBaseMethods().addUser(userDetails.uid, userData);
+        bool result = await DataBaseMethods().addUser(userDetails.uid, userData);
 
         if (result) {
           var box = Hive.box('authBox');

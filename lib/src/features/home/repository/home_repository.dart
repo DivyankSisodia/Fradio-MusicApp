@@ -42,7 +42,6 @@ class HomeRepository {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = jsonDecode(response.body);
-      print(responseJson);
       final List<dynamic> sections = responseJson['sections']['items'];
       print(sections);
       

@@ -29,12 +29,12 @@ class PopularRadioWidget extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
-                        color: Colors.white.withOpacity(0.6),
+                        color: Colors.greenAccent,
                         spreadRadius: 1,
                         blurRadius: 5,
-                        offset: const Offset(0, 3),
+                        offset: Offset(0, 3),
                       ),
                     ],
                   ),

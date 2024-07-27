@@ -8,4 +8,6 @@ class AppColor {
   static const Color extraColor = Color(0xFF005609);
   static const Color secondaryColor = Color(0xFFFFFFFF);
   static const Color tertiaryColor = Color.fromARGB(255, 38, 65, 25);
+  static const Color inactiveTabColor = Colors.white54;
+  static const Color activeTabColor = Color.fromARGB(255, 11, 255, 36);
 }

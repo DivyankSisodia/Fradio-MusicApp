@@ -7,6 +7,7 @@ import '../../features/auth/screen/login_with_email_screen.dart';
 import '../../features/auth/screen/phone_authentication.dart';
 import '../../features/auth/screen/signup_screen.dart';
 import '../../features/home/screen/home_screen.dart';
+import '../../features/search/screen/category_playlist_screen.dart';
 
 class Routes {
   static Route onGenerateRoute(RouteSettings settings) {
@@ -35,6 +36,11 @@ class Routes {
         final args = settings.arguments as String;
         return _cupertinoRoute(
           OTPScreen(verificationId: args),
+        );
+      case CategoryPlaylistScreen.routeName:
+        final args = settings.arguments as String;
+        return _cupertinoRoute(
+          CategoryPlaylistScreen(playlistId: args),
         );
       default:
         return _cupertinoRoute(

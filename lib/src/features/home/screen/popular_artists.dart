@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/constant/colors/app_colors.dart';
 import '../model/popular_artists_model.dart';
@@ -14,7 +16,7 @@ class PopularArtistsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: popularArtists.length,
@@ -26,25 +28,40 @@ class PopularArtistsWidget extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    popularArtists[index]
-                        .visuals
-                  ),
+                  backgroundColor: Colors
+                      .transparent, // Optional: to ensure the background is transparent
                   radius: 40,
+                  child: ClipOval(
+                    child: GestureDetector(
+                      onTap: () {
+                        print(popularArtists[index].id);
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: popularArtists[index].visuals,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(), // Optional: a placeholder widget while the image loads
+                        errorWidget: (context, url, error) => const Icon(Icons
+                            .error), // Optional: an error widget if the image fails to load
+                        fit: BoxFit.cover,
+                        width: 80,
+                        height: 80,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 8),
                 SizedBox(
-                  height: 20,
-                  width: 75,
+                  height: 40,
+                  width: 80,
                   child: Center(
                     child: Text(
-                      overflow:
-                          TextOverflow.ellipsis,
+                      maxLines: 2,
+                      // overflow: TextOverflow.ellipsis,
                       popularArtists[index].name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: AppColor
-                            .secondaryColor,
+                        color: AppColor.secondaryColor,
+                        fontFamily: GoogleFonts.poppins().fontFamily,
                       ),
                     ),
                   ),
