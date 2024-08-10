@@ -13,6 +13,8 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+
     return SliverAppBar(
       backgroundColor: AppColor.backGroundColor,
       pinned: true,
@@ -68,12 +70,18 @@ class CustomAppBar extends StatelessWidget {
                           color: AppColor.primaryColor,
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(
-                          FirebaseAuth.instance.currentUser!.photoURL!,
+                      if (currentUser != null && currentUser.photoURL != null)
+                        CircleAvatar(
+                          radius: 20,
+                          backgroundImage: NetworkImage(
+                            currentUser.photoURL!,
+                          ),
+                        )
+                      else
+                        const CircleAvatar(
+                          radius: 20,
+                          child: Icon(Icons.person),
                         ),
-                      )
                     ],
                   ),
                 ),

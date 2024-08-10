@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fradio/main.dart';
 import 'package:fradio/src/features/home/screen/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -54,12 +55,15 @@ class GoogleSignMethod {
           "uid": userDetails.uid,
         };
 
-        bool result = await DataBaseMethods().addUser(userDetails.uid, userData);
+        bool result =
+            await DataBaseMethods().addUser(userDetails.uid, userData);
+
+            print('User added to the database: $result');
 
         if (result) {
           var box = Hive.box('authBox');
           box.put('isSignedIn', true);
-          Navigator.of(context).pushNamed(HomeScreen.routeName);
+          Navigator.of(context).pushNamed(MainScreen.routeName);
         } else {
           print('Failed to add user to the database');
         }

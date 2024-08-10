@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fradio/bottom_navbar.dart';
@@ -20,13 +19,16 @@ import 'src/features/search/screen/search_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: 'Fradio',
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  
   // Load .env file
   await dotenv.load(fileName: ".env");
 
   // Initialize Hive
   await Hive.initFlutter();
+  
   // Register Hive Adaptors
   hiveAdaptors();
 
@@ -66,6 +68,7 @@ class MyApp extends ConsumerWidget {
 }
 
 class MainScreen extends ConsumerWidget {
+  static const String routeName = '/main';
   const MainScreen({super.key});
 
   @override

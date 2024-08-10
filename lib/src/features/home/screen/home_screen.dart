@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import '../../../config/api_keys/spotify/spotify_apis.dart';
 import '../../../core/utils/spotify_authorization.dart';
 import '../../../core/widgets/custom_appbar.dart';
+import '../../playlist/repository/get_playlist_track.dart';
 import '../../search/repository/get_categories_repository.dart';
 import '../controllers/popular_artist_controller.dart';
 import '../widgets/music_variation_chip.dart';
@@ -28,14 +29,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // Call the function to get the access token
-    getAccessToken(SpotifyCredentials.clientId, SpotifyCredentials.clientSecret);
-    GetCategories().getCategories();
+    getAccessToken(
+      SpotifyCredentials.clientId,
+      SpotifyCredentials.clientSecret,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final fullName = FirebaseAuth.instance.currentUser!.displayName;
-    String firstName = fullName!.split(' ')[0];
+    final user = FirebaseAuth.instance.currentUser;
+    final fullName = user?.displayName ?? 'Guest';
+    final firstName = fullName.split(' ')[0];
 
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,
@@ -44,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollBehavior: const ScrollBehavior(),
           slivers: [
             // Home AppBar
-            CustomAppBar(firstName: firstName),
+            CustomAppBar(
+              firstName: firstName,
+            ),
 
             // Music Variations chips list
             const MusicVariations(),
@@ -62,10 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 10),
                     Consumer(
                       builder: (context, ref, child) {
+                        print('homeScreen ke andar aya hu');
                         final homeDataAsyncValue = ref.watch(homeDataProvider);
-
                         return homeDataAsyncValue.when(
                           data: (homeData) {
+                            // print('homeScreen ke andar aya hu');
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

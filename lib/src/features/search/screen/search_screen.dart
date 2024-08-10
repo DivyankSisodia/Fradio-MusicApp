@@ -4,12 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fradio/src/core/constant/colors/app_colors.dart';
 import 'package:fradio/src/features/search/controller/category_controller.dart';
+import 'package:fradio/src/features/search/screen/category_playlist_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../home/controllers/popular_artist_controller.dart';
 import '../../home/screen/popular_artists.dart';
+import '../widgets/custom_searchbar.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -22,54 +24,16 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColor.primaryColor,
-                        hintText: 'Search songs, albums, artists ....',
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                          color: AppColor.backGroundColor,
-                          fontFamily: GoogleFonts.poppins().fontFamily,
-                        ),
-                        prefixIcon: const Padding(
-                          padding: EdgeInsets.only(
-                            left: 20.0,
-                            right: 15.0,
-                          ),
-                          child: Icon(
-                            Iconsax.search_normal,
-                            color: AppColor.backGroundColor,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColor.secondaryColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(
-                            color: AppColor.secondaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
+            // Custom Search Bar
+            const CustomSearchBar(),
+
             const SizedBox(height: 20),
+
+            // Popular Artists
             Consumer(
               builder: (context, ref, child) {
                 final homeDataAsyncValue = ref.watch(homeDataProvider);
-
                 return homeDataAsyncValue.when(
                   data: (homeData) {
                     return Padding(
@@ -113,6 +77,7 @@ class SearchScreen extends StatelessWidget {
                 );
               },
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
@@ -134,17 +99,18 @@ class SearchScreen extends StatelessWidget {
                 ],
               ),
             ),
+
             const Gap(8),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.48,
+
+            // Make the grid take up the remaining space
+            Expanded(
               child: Consumer(
                 builder: (context, ref, child) {
                   final categoryList = ref.watch(categoriesProvider);
                   return categoryList.when(
                     data: (categoryData) {
                       return MasonryGridView.builder(
-                        // physics: const NeverScrollableScrollPhysics(),
-                        // shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         itemCount:
                             categoryData.length - 1, // Exclude the first item
                         gridDelegate:
@@ -158,11 +124,17 @@ class SearchScreen extends StatelessWidget {
                             onTap: () {
                               // Navigate to the category playlist screen
                               print('Category: ${category.id}');
+                              Navigator.of(context).pushNamed(
+                                CategoryPlaylistScreen.routeName,
+                                arguments: {
+                                  'id': category.id,
+                                  'name': category.name,
+                                },
+                              );
                             },
                             child: Container(
                               margin: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                // color: AppColor.primaryColor,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Column(

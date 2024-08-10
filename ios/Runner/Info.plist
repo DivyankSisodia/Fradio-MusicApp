@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-    <string>Your app needs access to the camera to take photos and videos.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Your app needs access to the photo library to select photos and videos.</string>
-	<key>GIDClientID</key>
-    <string>771913849510-i2ulinhocqk7hs5umaiaab1e9lvakh60.apps.googleusercontent.com</string>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -43,8 +35,14 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GIDClientID</key>
+	<string>771913849510-i2ulinhocqk7hs5umaiaab1e9lvakh60.apps.googleusercontent.com</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Your app needs access to the camera to take photos and videos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your app needs access to the photo library to select photos and videos.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

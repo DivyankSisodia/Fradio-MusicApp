@@ -15,21 +15,27 @@ class GetCategories {
 
     print('Token: $token'); // Debug print
 
-    final response = await http.get(
-      Uri.parse(categoryUrl),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+    try {
+      final response = await http.get(
+        Uri.parse(categoryUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
-      print('Categories Data: ${data['categories']['items']}'); // Debug print
-      return (data['categories']['items'] as List)
-          .map((item) => CategoriesModel.fromJson(item))
-          .toList();
-    } else {
-      throw Exception('Failed to get genres');
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        // print('Categories Data: ${data['categories']['items']}');
+        return (data['categories']['items'] as List)
+            .map((item) => CategoriesModel.fromJson(item))
+            .toList();
+      } else {
+        print('Failed to get categories: ${response.statusCode}');
+        throw Exception('Failed to get categories');
+      }
+    } catch (error) {
+      print('Error: $error');
+      throw Exception('Failed to get categories: $error');
     }
   }
 }

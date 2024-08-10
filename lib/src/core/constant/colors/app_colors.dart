@@ -10,4 +10,5 @@ class AppColor {
   static const Color tertiaryColor = Color.fromARGB(255, 38, 65, 25);
   static const Color inactiveTabColor = Colors.white54;
   static const Color activeTabColor = Color.fromARGB(255, 11, 255, 36);
+  static const Color buttonColor = Color.fromARGB(255, 58, 148, 67);
 }

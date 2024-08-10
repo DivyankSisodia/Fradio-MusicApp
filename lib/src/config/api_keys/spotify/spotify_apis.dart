@@ -1,6 +1,7 @@
 class SpotifyApis {
   static const String token = 'https://accounts.spotify.com/api/token';
   static const String categories = 'https://api.spotify.com/v1/browse/categories';
+  static const String playlist = 'https://api.spotify.com/v1/playlists';
 }
 
 class SpotifyCredentials {

@@ -5,6 +5,7 @@ import 'package:fradio/src/core/utils/validator.dart';
 import 'package:fradio/src/features/auth/widget/registration_buttons.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../main.dart';
 import '../../../core/constant/size/app_size.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../home/screen/home_screen.dart';
@@ -83,7 +84,7 @@ class EmailLoginScreen extends ConsumerWidget {
                               );
                           Navigator.pushNamedAndRemoveUntil(
                             context,
-                            HomeScreen.routeName,
+                            MainScreen.routeName,
                             (route) => false,
                           );
                         }
