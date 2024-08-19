@@ -15,6 +15,9 @@ class PopularAlbumWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PageController pageController = PageController(
+      viewportFraction: 0.6,
+    );
     return SizedBox(
       height: 200,
       child: ListView.builder(
@@ -22,14 +25,13 @@ class PopularAlbumWidget extends StatelessWidget {
         itemCount: popularAlbums.length,
         itemBuilder: (context, index) {
           return Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-            ),
+            width: MediaQuery.of(context).size.width * 0.35,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
@@ -42,12 +44,11 @@ class PopularAlbumWidget extends StatelessWidget {
                     ],
                   ),
                   height: 160.h,
-                  width: 120.w,
+                  width: MediaQuery.of(context).size.width * 0.35,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
-                      imageUrl: popularAlbums[index]
-                          .cover,// Adjust index according to your data structure
+                      imageUrl: popularAlbums[index].cover,
                       placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(),
                       ),

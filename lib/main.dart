@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,13 +24,13 @@ void main() async {
     name: 'Fradio',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   // Load .env file
   await dotenv.load(fileName: ".env");
 
   // Initialize Hive
   await Hive.initFlutter();
-  
+
   // Register Hive Adaptors
   hiveAdaptors();
 
@@ -55,11 +57,13 @@ class MyApp extends ConsumerWidget {
     final isSignedIn = ref.watch(signInProvider);
 
     return MaterialApp(
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ),
+      ), 
       home: isSignedIn ? const MainScreen() : const LoginScreen(),
       onGenerateRoute: (RouteSettings settings) =>
           Routes.onGenerateRoute(settings),

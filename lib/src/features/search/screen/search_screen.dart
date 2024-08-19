@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fradio/src/core/constant/colors/app_colors.dart';
-import 'package:fradio/src/features/search/controller/category_controller.dart';
+import 'package:fradio/src/features/search/controller/categories/category_controller.dart';
 import 'package:fradio/src/features/search/screen/category_playlist_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';

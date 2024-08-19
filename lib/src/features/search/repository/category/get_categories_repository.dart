@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fradio/src/config/api_keys/spotify/spotify_apis.dart';
-import 'package:fradio/src/features/search/model/categories_model.dart';
+import 'package:fradio/src/features/search/model/categories/categories_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +13,7 @@ class GetCategories {
 
     String token = prefs.getString('access_token')!;
 
-    print('Token: $token'); // Debug print
+    print('categories Token: $token'); // Debug print
 
     try {
       final response = await http.get(

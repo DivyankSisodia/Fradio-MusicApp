@@ -7,8 +7,6 @@ import 'package:gap/gap.dart';
 import '../../../config/api_keys/spotify/spotify_apis.dart';
 import '../../../core/utils/spotify_authorization.dart';
 import '../../../core/widgets/custom_appbar.dart';
-import '../../playlist/repository/get_playlist_track.dart';
-import '../../search/repository/get_categories_repository.dart';
 import '../controllers/popular_artist_controller.dart';
 import '../widgets/music_variation_chip.dart';
 import 'popluar_radio.dart';
@@ -68,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 10),
                     Consumer(
                       builder: (context, ref, child) {
-                        print('homeScreen ke andar aya hu');
                         final homeDataAsyncValue = ref.watch(homeDataProvider);
                         return homeDataAsyncValue.when(
                           data: (homeData) {

@@ -14,6 +14,7 @@ class GetPlaylistTrack {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('access_token')!;
+    print('playlist track token $token');
 
     final response = await http.get(Uri.parse(playlistTrackUrl), headers: {
       'Authorization': 'Bearer $token',

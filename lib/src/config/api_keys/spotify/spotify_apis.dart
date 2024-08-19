@@ -1,7 +1,10 @@
 class SpotifyApis {
   static const String token = 'https://accounts.spotify.com/api/token';
-  static const String categories = 'https://api.spotify.com/v1/browse/categories';
+  static const String categories =
+      'https://api.spotify.com/v1/browse/categories';
   static const String playlist = 'https://api.spotify.com/v1/playlists';
+  static const String search = 'https://api.spotify.com/v1/search';
+  static const String album = 'https://api.spotify.com/v1/albums';
 }
 
 class SpotifyCredentials {

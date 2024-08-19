@@ -21,12 +21,14 @@ Future<String> getAccessToken(String clientId, String clientSecret) async {
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = jsonDecode(response.body);
-    debugPrint(data['access_token']);
+    debugPrint(' access token function ${data['access_token']}');
     final String? accessToken = data['access_token'];
 
     // Save the access token to shared preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('access_token', accessToken!);
+
+    print('Access Token: $accessToken');
     
     return data['access_token'];
   } else {
